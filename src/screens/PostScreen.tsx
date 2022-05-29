@@ -3,6 +3,8 @@ import {Alert, Button, Image, ScrollView, StyleSheet, Text, View} from "react-na
 import {DATA} from "../data";
 import {THEME} from "../theme";
 import {PostType} from "../types";
+import {HeaderButtons, Item} from "react-navigation-header-buttons";
+import AppHeaderIcon from "../components/AppHeaderIcon";
 
 const PostDefault: PostType = {
     id: '0',
@@ -16,9 +18,22 @@ const PostScreen = ({route, navigation}: any) => {
     const { postId } = route.params
 
     const post = DATA.find(p => p.id === postId) || PostDefault
+    const iconName = post.bookmarked ? 'ios-star' : 'ios-star-outline'
 
     useEffect(() => {
-        navigation.setOptions({ title: `Post #${postId}, ${new Date(post.date).toLocaleDateString()}` })
+        navigation.setOptions({
+            title: `Post #${postId}, 
+            ${new Date(post.date).toLocaleDateString()}`,
+            headerRight: () => (
+                <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+                    <Item
+                        title='Take photo'
+                        iconName={iconName}
+                        onPress={() => console.log('Press photo')}
+                    />
+                </HeaderButtons>
+            )
+        })
     }, [postId])
 
     const removeHandler = () => {

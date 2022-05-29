@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
+import 'react-native-gesture-handler';
 import {useState} from "react";
 import AppLoading from 'expo-app-loading'
 import {bootstrap} from "./src/bootstrap";
